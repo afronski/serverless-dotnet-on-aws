@@ -1,0 +1,11 @@
+{
+  "name": "serverless-dotnet-on-aws",
+  "version": "1.0.0",
+  "description": "Source code for the talk 'Serverless .NET on AWS'.",
+  "author": "Wojciech Gawronski <wojciech.gawronski@pattern-match.com>",
+  "license": "MIT",
+  "repository": "https://github.com/patternmatch/serverless-dotnet-on-aws",
+  "dependencies": {
+    "serverless": "^1.32.0"
+  }
+}

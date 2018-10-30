@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp1.0</TargetFramework>
+    <AssemblyName>TelephonistServiceCSharp</AssemblyName>
+    <PackageId>TelephonistServiceCSharp</PackageId>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="NETStandard.Library" Version="1.6.0" />
+    <PackageReference Include="AWSSDK.Core" Version="3.3.20" />
+    <PackageReference Include="AWSSDK.Lambda" Version="3.3.10" />
+    <PackageReference Include="Amazon.Lambda.Core" Version="1.0.0" />
+    <PackageReference Include="Amazon.Lambda.Serialization.Json" Version="1.1.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <DotNetCliToolReference Include="Amazon.Lambda.Tools" Version="1.8.1" />
+  </ItemGroup>
+</Project>
