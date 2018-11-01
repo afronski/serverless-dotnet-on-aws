@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 
 using Amazon.Lambda.Core;
 
+using Amazon.XRay.Recorder.Handlers.AwsSdk;
+
 using Telephonist.Models;
 using Telephonist.Utilities;
 
@@ -26,6 +28,8 @@ namespace Telephonist
   {
     public async Task<OnCallOperatorDetails> GetDetailsForCurrentOnCallOperator(EmptyRequest request, ILambdaContext context)
     {
+      AWSSDKHandler.RegisterXRayForAllServices();
+
       string subdomain = Environment.GetEnvironmentVariable("PAGER_DUTY_DOMAIN");
       string apiToken = Environment.GetEnvironmentVariable("PAGER_DUTY_API_KEY");
 
@@ -36,8 +40,6 @@ namespace Telephonist
       LambdaLogger.Log($"PARAM: subdomain={subdomain}");
       LambdaLogger.Log($"PARAM: apiToken={apiToken}");
       LambdaLogger.Log($"PARAM: scheduleId={scheduleId}");
-
-      PagerDutyClient service = new PagerDutyClient(subdomain, apiToken);
 
       User user = await GetCurrentOnCallOperator(subdomain, apiToken, scheduleId);
 

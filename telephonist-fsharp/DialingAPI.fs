@@ -16,14 +16,16 @@ module DialingAPI =
   open System.Net.Http.Headers
   open System.Text
 
+  open Amazon.XRay.Recorder.Handlers.AwsSdk
+  open Amazon.XRay.Recorder.Handlers.System.Net
+
   let httpPostAsync(url : string, sid : string, token : string, content : StringContent) =
     async {
-      let httpClient = new System.Net.Http.HttpClient()
+      let httpClient = new System.Net.Http.HttpClient(new HttpClientXRayTracingHandler(new HttpClientHandler()))
 
       let value = Convert.ToBase64String(Encoding.UTF8.GetBytes(sprintf "%s:%s" sid token))
       let authorizationHeader = new AuthenticationHeaderValue("Basic", value)
 
-      httpClient.DefaultRequestHeaders.Authorization <- authorizationHeader
       httpClient.DefaultRequestHeaders.Authorization <- authorizationHeader
 
       let! response = httpClient.PostAsync(url, content) |> Async.AwaitTask
@@ -35,6 +37,8 @@ module DialingAPI =
     }
 
   let testOnCallPhoneNumber(request : Request) =
+    AWSSDKHandler.RegisterXRayForAllServices()
+
     let accountSid = Environment.GetEnvironmentVariable("TWILIO_ACCOUNT_SID")
     let apiToken = Environment.GetEnvironmentVariable("TWILIO_API_TOKEN")
     let caller = Environment.GetEnvironmentVariable("CALLER")

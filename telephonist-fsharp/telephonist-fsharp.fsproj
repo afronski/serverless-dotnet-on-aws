@@ -1,6 +1,6 @@
-<Project Sdk="FSharp.NET.Sdk;Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netcoreapp1.0</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
     <AssemblyName>TelephonistServiceFSharp</AssemblyName>
     <PackageId>TelephonistServiceFSharp</PackageId>
   </PropertyGroup>
@@ -8,13 +8,13 @@
     <Compile Include="DialingAPI.fs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="NETStandard.Library" Version="1.6.0" />
     <PackageReference Include="Amazon.Lambda.Core" Version="1.0.0" />
-    <PackageReference Include="Amazon.Lambda.Serialization.Json" Version="1.1.0" />
-    <PackageReference Include="FSharp.Core" Version="4.1.*" />
-    <PackageReference Include="FSharp.NET.Sdk" Version="1.0.*" PrivateAssets="All" />
+    <PackageReference Include="Amazon.Lambda.Serialization.Json" Version="1.3.0" />
+    <PackageReference Include="AWSXRayRecorder.Core" Version="2.3.1-beta" />
+    <PackageReference Include="AWSXRayRecorder.Handlers.AwsSdk" Version="2.3.1-beta" />
+    <PackageReference Include="AWSXRayRecorder.Handlers.System.Net" Version="2.3.1-beta" />
   </ItemGroup>
   <ItemGroup>
-    <DotNetCliToolReference Include="Amazon.Lambda.Tools" Version="1.8.1" />
+    <DotNetCliToolReference Include="Amazon.Lambda.Tools" Version="2.2.0" />
   </ItemGroup>
 </Project>

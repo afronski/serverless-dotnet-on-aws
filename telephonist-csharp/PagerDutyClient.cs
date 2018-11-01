@@ -6,7 +6,13 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
+using Amazon;
+using Amazon.CloudWatch;
+using Amazon.CloudWatch.Model;
+
 using Amazon.Lambda.Core;
+
+using Amazon.XRay.Recorder.Handlers.System.Net;
 
 using Telephonist.Utilities;
 
@@ -23,7 +29,7 @@ namespace Telephonist
       this.subdomain = subdomain;
       this.authorization = $"Token token={apiToken}";
 
-      this.client = new HttpClient();
+      this.client = new HttpClient(new HttpClientXRayTracingHandler(new HttpClientHandler()));
       this.client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", this.authorization);
     }
 
@@ -44,6 +50,8 @@ namespace Telephonist
       LambdaLogger.Log($"path: {path}");
       LambdaLogger.Log($"Status Code: {response.StatusCode}");
 
+      LogAPICall(PagerDutyAPICallType.GetSchedule).Forget();
+
       if (response.IsSuccessStatusCode)
       {
         return await response.Content.ReadAsStringAsync();
@@ -61,12 +69,53 @@ namespace Telephonist
       LambdaLogger.Log($"path: {path}");
       LambdaLogger.Log($"Status Code: {response.StatusCode}");
 
+      LogAPICall(PagerDutyAPICallType.GetUserContactMethods).Forget();
+
       if (response.IsSuccessStatusCode)
       {
         return await response.Content.ReadAsStringAsync();
       }
 
       return null;
+    }
+
+    private sealed class PagerDutyAPICallType {
+      private readonly String name;
+
+      public static readonly PagerDutyAPICallType GetSchedule = new PagerDutyAPICallType("GET /api/v1/schedules/{scheduleId}");
+      public static readonly PagerDutyAPICallType GetUserContactMethods = new PagerDutyAPICallType("GET /api/v1/users/{userId}/contact_methods");
+
+      private PagerDutyAPICallType(String name)
+      {
+        this.name = name;
+      }
+
+      public override String ToString()
+      {
+        return name;
+      }
+    }
+
+    private async Task<PutMetricDataResponse> LogAPICall(PagerDutyAPICallType apiCallType)
+    {
+      IAmazonCloudWatch client = new AmazonCloudWatchClient();
+
+      MetricDatum point = new MetricDatum
+      {
+        MetricName = apiCallType.ToString(),
+        StatisticValues = new StatisticSet(),
+        TimestampUtc = DateTime.Today,
+        Unit = StandardUnit.Count,
+        Value = 1
+      };
+
+      PutMetricDataRequest request = new PutMetricDataRequest
+      {
+        MetricData = new List<MetricDatum>() { point },
+        Namespace = "Serverless Telephonist - External API Calls - PagerDuty"
+      };
+
+      return await client.PutMetricDataAsync(request);
     }
   }
 }

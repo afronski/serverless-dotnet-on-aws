@@ -8,6 +8,8 @@ using Amazon.Lambda;
 using Amazon.Lambda.Core;
 using Amazon.Lambda.Model;
 
+using Amazon.XRay.Recorder.Handlers.AwsSdk;
+
 using Telephonist.Models;
 using Telephonist.Utilities;
 
@@ -27,6 +29,8 @@ namespace Telephonist
 
     public async Task<string> HandleIncomingCall(TwilioIncomingCall twilioCallDetails, ILambdaContext context)
     {
+      AWSSDKHandler.RegisterXRayForAllServices();
+
       string stage = System.Environment.GetEnvironmentVariable("STAGE");
       string region = System.Environment.GetEnvironmentVariable("AWS_REGION");
 

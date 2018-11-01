@@ -1,10 +1,12 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
-using System.Collections.Generic;
+using System.Threading.Tasks;
 
+using Amazon.Lambda;
 using Amazon.Lambda.Core;
 using Amazon.Lambda.Serialization.Json;
 
@@ -12,6 +14,14 @@ using Newtonsoft.Json.Linq;
 
 namespace Telephonist.Utilities
 {
+  public static class TaskExtensions
+  {
+      public static void Forget(this Task task)
+      {
+        task.ContinueWith(t => { LambdaLogger.Log($"ERROR: {t.Exception}"); }, TaskContinuationOptions.OnlyOnFaulted);
+      }
+  }
+
   public static class WebHelpers
   {
     public static string ToQueryString(Dictionary<string, string> source)

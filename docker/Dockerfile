@@ -2,7 +2,7 @@ FROM cfbarbero/aws-lambda-dotnet-build
 
 LABEL maintainer "services+dockerhub@pattern-match.com"
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get update -q && apt-get install -y sudo git build-essential autoconf libncurses5-dev libssh-dev unixodbc-dev git wget curl unzip inotify-tools python-pip python-virtualenv
+RUN DEBIAN_FRONTEND=noninteractive apt-get update -q && apt-get upgrade -y && apt-get install -y sudo git build-essential autoconf libncurses5-dev libssh-dev unixodbc-dev git wget curl unzip inotify-tools python-pip python-virtualenv dotnet-sdk-2.1 && apt autoremove -y
 
 ENV LANG C.UTF-8
 
