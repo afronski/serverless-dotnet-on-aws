@@ -1,7 +1,7 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 OPERATION=${1}
-PROFILE=${2:-"private"}
+PROFILE=${2:-"pattern-match-workshops"}
 
 STACK_NAME="serverless-telephonist-infrastructure"
 
@@ -20,8 +20,10 @@ elif [[ "${OPERATION}" == "delete" ]]; then
     --stack-name "${STACK_NAME}"
 
 else
+
   echo "Unknown operation passed as a first argument (only 'create' or 'delete' are supported)."
   exit 1
+
 fi
 
 exit 0

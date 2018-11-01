@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 BUCKET="${1:-serverless-telephonist-ui}"
 PROFILE="${2:-private}"

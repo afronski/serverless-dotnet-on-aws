@@ -21,8 +21,8 @@ RUN /bin/bash -c "git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch
                   echo -e '\n. $HOME/.asdf/completions/asdf.bash' >> ~/.bashrc          && \
                   source ~/.bashrc                                                      && \
                   asdf plugin-add nodejs                                                && \
-                  asdf install nodejs 6.11.4                                            && \
-                  echo -e 'nodejs 6.11.4\n' > ~/.tool-versions                          && \
+                  asdf install nodejs 9.11.2                                            && \
+                  echo -e 'nodejs 9.11.2\n' > ~/.tool-versions                          && \
                   npm install --global serverless"
 
 WORKDIR /var/app

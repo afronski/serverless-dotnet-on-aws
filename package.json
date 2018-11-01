@@ -5,7 +5,8 @@
   "author": "Wojciech Gawronski <wojciech.gawronski@pattern-match.com>",
   "license": "MIT",
   "repository": "https://github.com/patternmatch/serverless-dotnet-on-aws",
-  "dependencies": {
-    "serverless": "^1.32.0"
+  "devDependencies": {
+    "serverless": "^1.32.0",
+    "serverless-plugin-tracing": "^2.0.0"
   }
 }

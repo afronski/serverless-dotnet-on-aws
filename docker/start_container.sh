@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 IMAGE_NAME="aws-lambda-for-dotnet-with-serverless-framework"
 CONTAINER_NAME="aws-lambda-telephonist-dev"
