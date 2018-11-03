@@ -1,9 +1,6 @@
 (function (window) {
   "use strict";
 
-  const GET_ON_CALL_DETAILS_API_ENDPOINT = "https://<YOUR C# API>.execute-api.eu-central-1.amazonaws.com/production/operators/current/details";
-  const TEST_ON_CALL_API_ENDPOINT = "https://<YOUR F# API>.execute-api.eu-central-1.amazonaws.com/production/calls/test";
-
   const PERSISTENT_MODAL = {
     backdrop: "static",
     keyboard: false,
@@ -38,7 +35,7 @@
 
   function fetchCurrentOnCallDetails() {
     $.ajax({
-      url: GET_ON_CALL_DETAILS_API_ENDPOINT,
+      url: ServerlessTelephonist.API.GetOnCallOperatorDetailsURL,
       type: "GET",
 
       beforeSend: function (xhr) {
@@ -61,7 +58,7 @@
 
   function testOnCallNumber() {
     $.ajax({
-      url: TEST_ON_CALL_API_ENDPOINT,
+      url: ServerlessTelephonist.API.TestOnCallNumberURL,
       type: "POST",
       contentType: "application/json; charset=utf-8",
 
@@ -164,15 +161,15 @@
         $("#change-password").click((event) => {
           event.preventDefault();
 
-          var usernameChangePassword = $("#change-password-box-email").val();
+          var usernameChangePassword = $("#change-password-box-username").val();
           var newPassword = $("#change-password-box-new-password").val();
           var newPasswordAgain = $("#change-password-box-new-password-again").val();
 
           if (username !== usernameChangePassword) {
-            $("#change-password-box-email").parent(".form-group").addClass("has-error");
+            $("#change-password-box-username").parent(".form-group").addClass("has-error");
             return;
           } else {
-            $("#change-password-box-email").parent(".form-group").removeClass("has-error");
+            $("#change-password-box-username").parent(".form-group").removeClass("has-error");
           }
 
           if (newPassword !== newPasswordAgain || !newPassword) {

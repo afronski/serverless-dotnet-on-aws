@@ -18,6 +18,7 @@ During that we will cover following topics:
 - *Amazon Cognito*,
 - *Amazon S3*,
 - *Amazon Lambda*,
+- *Amazon API Gateway*,
 - [*Serverless Framework*](https://serverless.com),
 - *Best practices*, when it comes to development of such applications.
 

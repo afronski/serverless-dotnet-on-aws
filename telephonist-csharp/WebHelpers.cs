@@ -43,11 +43,6 @@ namespace Telephonist.Utilities
       }
     }
 
-    public static string MapToOlsonTimeZone(string pagerDutyTZ)
-    {
-      return PagerDutyToOlsonTimeZones[pagerDutyTZ];
-    }
-
     public static TimeZoneInfo OlsonTimeZoneToTimeZoneInfo(string olsonTimeZoneId)
     {
       TimeZoneInfo timeZoneInfo = default(TimeZoneInfo);

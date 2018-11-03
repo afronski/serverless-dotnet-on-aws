@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 OPERATION=${1}
-PROFILE=${2:-"pattern-match-workshops"}
+PROFILE=${2:-"pattern-match"}
 
 STACK_NAME="serverless-telephonist-infrastructure"
 

@@ -41,6 +41,7 @@ namespace Telephonist
       Dictionary<string, string> parameters = new Dictionary<string, string>();
       parameters["since"] = now.ToString("s", CultureInfo.InvariantCulture);
       parameters["until"] = oneSecondLater.ToString("s", CultureInfo.InvariantCulture);
+      parameters["time_zone"] = "UTC";
 
       string queryString = WebHelpers.ToQueryString(parameters);
       string path = $"https://{this.subdomain}.pagerduty.com/api/v1/schedules/{scheduleId}?{queryString}";
@@ -100,19 +101,25 @@ namespace Telephonist
     {
       IAmazonCloudWatch client = new AmazonCloudWatchClient();
 
-      MetricDatum point = new MetricDatum
+      Dimension dimension = new Dimension()
       {
+        Name = "PagerDuty",
+        Value = "API Calls"
+      };
+
+      MetricDatum point = new MetricDatum()
+      {
+        Dimensions = new List<Dimension>() { dimension },
         MetricName = apiCallType.ToString(),
-        StatisticValues = new StatisticSet(),
-        TimestampUtc = DateTime.Today,
         Unit = StandardUnit.Count,
-        Value = 1
+        StorageResolution = 1,
+        Value = 1.0
       };
 
       PutMetricDataRequest request = new PutMetricDataRequest
       {
         MetricData = new List<MetricDatum>() { point },
-        Namespace = "Serverless Telephonist - External API Calls - PagerDuty"
+        Namespace = "External API Calls"
       };
 
       return await client.PutMetricDataAsync(request);

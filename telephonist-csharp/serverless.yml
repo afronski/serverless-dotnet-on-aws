@@ -1,7 +1,7 @@
 service: telephonist-csharp
 provider:
   name: aws
-  profile: private
+  profile: pattern-match
   region: eu-central-1
   stage: production
   runtime: dotnetcore2.1
@@ -15,8 +15,14 @@ provider:
         - "*"
     - Effect: Allow
       Action:
+        - cloudwatch:PutMetricData
+      Resource:
+        - "*"
+    - Effect: Allow
+      Action:
         - lambda:InvokeFunction
-      Resource: "*"
+      Resource:
+        - "*"
 
 package:
   artifact: bin/release/netcoreapp2.1/deploy-package.zip

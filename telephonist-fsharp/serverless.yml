@@ -1,7 +1,7 @@
 service: telephonist-fsharp
 provider:
   name: aws
-  profile: private
+  profile: pattern-match
   region: eu-central-1
   stage: production
   runtime: dotnetcore2.1

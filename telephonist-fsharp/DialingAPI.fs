@@ -62,4 +62,6 @@ module DialingAPI =
 
     let result = httpPostAsync(url, accountSid, apiToken, content) |> Async.RunSynchronously
 
+    LambdaLogger.Log(sprintf "RESULT: %s" result)
+
     { Status = "On-call number called successfully."; TwilioRawResult = result }

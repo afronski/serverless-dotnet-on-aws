@@ -21,7 +21,7 @@ Resources:
   ServerlessTelephonistWebsiteBucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: "serverless-telephonist-ui"
+      BucketName: "serverless-telephonist-gui"
       AccessControl: PublicRead
       WebsiteConfiguration:
         IndexDocument: index.html

@@ -50,7 +50,7 @@ namespace Telephonist
         OnCallOperatorDetails result = new OnCallOperatorDetails()
         {
           Name = user.Name,
-          TimeZone = WebHelpers.MapToOlsonTimeZone(user.TimeZone),
+          TimeZone = user.TimeZone,
           PhoneNumber = $"+{phone.CountryCode}{phone.PhoneNumber}"
         };
 
@@ -80,7 +80,7 @@ namespace Telephonist
       return new User()
       {
         Id = user.id,
-        Name = user.name,
+        Name = user.summary,
         TimeZone = response.schedule.time_zone
       };
     }
@@ -99,8 +99,8 @@ namespace Telephonist
 
       dynamic response = WebHelpers.ParseJSON(data);
 
-      var contacts = ((IEnumerable<dynamic>) response.contact_methods).Where(method => method.type == "phone");
-      List<UserPhone> phones = contacts.Select(method => new UserPhone() { CountryCode = method.country_code, PhoneNumber = method.phone_number }).ToList();
+      var contacts = ((IEnumerable<dynamic>) response.contact_methods).Where(method => method.type == "phone_contact_method");
+      List<UserPhone> phones = contacts.Select(method => new UserPhone() { CountryCode = method.country_code, PhoneNumber = method.address }).ToList();
 
       if (phones.Count != 0)
       {
