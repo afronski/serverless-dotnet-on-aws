@@ -45,6 +45,7 @@
       success: function (response) {
         console.log("Getting on-call details: ", response);
 
+        $("#on-call-number").text(ServerlessTelephonist.OnCallNumber)
         $("#on-call-name").text(response.Name);
         $("#on-call-tz").text(response.TimeZone);
         $("#on-call-phone").text(response.PhoneNumber);

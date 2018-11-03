@@ -13,7 +13,9 @@
     API: {
       GetOnCallOperatorDetailsURL: "https://<YOUR_CSHARP_API_NAME>.execute-api.<AWS_REGION>.amazonaws.com/production/operators/current/details",
       TestOnCallNumberURL: "https://<YOUR_FSHARP_API_NAME>.execute-api.<AWS_REGION>.amazonaws.com/production/calls/test"
-    }
+    },
+
+    OnCallNumber: "<ON_CALL_NUMBER>"
   };
 
 } (window));
