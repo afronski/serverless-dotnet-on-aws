@@ -3,7 +3,7 @@
 ## Diagram
 
 <p align="center">
-  <img src="https://github.com/pattern-match/serverless-dotnet-on-aws/raw/master/documentation/diagram.png" />
+  <img src="https://github.com/patternmatch/serverless-dotnet-on-aws/blob/master/documentation/diagram.png" />
 </p>
 
 ## Presentation
@@ -18,10 +18,10 @@
 8. Present main number in *Twilio* and what will be executed in response after calling that via phone.
 9. Show *C#* code that is used in response to a phone call and then redirect to a proper number.
 10. Choose one person from the audience with a phone, ask it to stand, and describe what she will hear after dialing the on-call number.
-  - Present a ringing phone and answer the call.
+    1. Present a ringing phone and answer the call.
 11. Present secondary number in *Twilio*, and explain why we need a button for testing on-call shift.
-  - Show *F#* code that is used in to invoke a programmatic phone call.
-  - Click the button, wait for a call, and enable speaker in order to hear that *Twilio* automatically called you.
+    1. Show *F#* code that is used in to invoke a programmatic phone call.
+    2. Click the button, wait for a call, and enable speaker in order to hear that *Twilio* automatically called you.
 12. Show how logs are gathered in the *Amazon CloudWatch* console.
 13. Show how metrics are gathered in the *Amazon CloudWatch* console.
 14. Show how you can debug and trace with use of *AWS X-Ray*.
@@ -29,4 +29,4 @@
 ## FAQ
 
 1. **Q**: Why you have separated *C#* and *F#* projects?
-  - **A**: There is no way to share different languages inside one project, you can do it only via multiple projects in a single solution.
+    1. **A**: There is no way to share different languages inside one project, you can do it only via multiple projects in a single solution.
