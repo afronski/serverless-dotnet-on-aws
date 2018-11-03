@@ -11,4 +11,4 @@ ON_CALL_NUMBER: "+48<Phone number that will be paged and called by external syst
 TEST_SCENARIO_TWIML_URL: <Test scenario that will be used by caller during test>
 
 AWS_ACCOUNT_ID: <Your AWS account ID>
-COGNITO_USER_POOL_NAME: <Name of AWS Cognito user pool used here>
+COGNITO_USER_POOL_NAME: <Id of Amazon Cognito user pool>
